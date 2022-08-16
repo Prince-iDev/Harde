@@ -137,7 +137,7 @@ class BooksController extends Controller
         }
     }
 
-    public function search($name, $country, $publisher, $release_date)
+    public function searchName($name)
     {
         $search = Book::where("name", "like", "%".$name."%")->get();
             if(count($search)){
@@ -152,6 +152,63 @@ class BooksController extends Controller
                     'succcess' => false,
                     'message' => 'Search Error',
                     'error' => 'We could not find Job related to '."'".$name."'".', Kindly try again.'
+                ], 422);
+            }
+    }
+
+    public function searchCountry($country)
+    {
+        $search = Book::where("country", "like", "%".$country."%")->get();
+            if(count($search)){
+                return response()->json([
+                    'succcess' => true,
+                    'message' => 'Search successful!',
+                    'data'    => $search,
+                ], 200);
+            }
+            else {
+                return response()->json([
+                    'succcess' => false,
+                    'message' => 'Search Error',
+                    'error' => 'We could not find Job related to '."'".$country."'".', Kindly try again.'
+                ], 422);
+            }
+    }
+
+    public function searchPublisher($publisher)
+    {
+        $search = Book::where("publisher", "like", "%".$publisher."%")->get();
+            if(count($search)){
+                return response()->json([
+                    'succcess' => true,
+                    'message' => 'Search successful!',
+                    'data'    => $search,
+                ], 200);
+            }
+            else {
+                return response()->json([
+                    'succcess' => false,
+                    'message' => 'Search Error',
+                    'error' => 'We could not find Job related to '."'".$publisher."'".', Kindly try again.'
+                ], 422);
+            }
+    }
+
+    public function searchYear($year)
+    {
+        $search = Book::where("release_date", "like", "%".$year."%")->get();
+            if(count($search)){
+                return response()->json([
+                    'succcess' => true,
+                    'message' => 'Search successful!',
+                    'data'    => $search,
+                ], 200);
+            }
+            else {
+                return response()->json([
+                    'succcess' => false,
+                    'message' => 'Search Error',
+                    'error' => 'We could not find Job related to '."'".$year."'".', Kindly try again.'
                 ], 422);
             }
     }
