@@ -142,17 +142,19 @@ class BooksController extends Controller
         $search = Book::where("name", "like", "%".$name."%")->get();
             if(count($search)){
                 return response()->json([
+                    "status_code"=> 200,
                     'succcess' => "success",
                     'message' => 'Search successful!',
                     'data'    => $search,
-                ], 200);
+                ]);
             }
             else {
                 return response()->json([
+                    "status_code"=> 422,
                     'succcess' => "successful with Exeption",
                     'message' => 'Search Error',
                     'error' => 'We could not find Job related to '."'".$name."'".', Kindly try again.'
-                ], 422);
+                ]);
             }
     }
 
@@ -161,17 +163,19 @@ class BooksController extends Controller
         $search = Book::where("country", "like", "%".$country."%")->get();
             if(count($search)){
                 return response()->json([
+                    "status_code"=> 200,
                     'succcess' => "success",
                     'message' => 'Search successful!',
                     'data'    => $search,
-                ], 200);
+                ]);
             }
             else {
                 return response()->json([
+                    "status_code"=> 422,
                     'succcess' => "successful with Exeption",
                     'message' => 'Search Error',
                     'error' => 'We could not find Job related to '."'".$country."'".', Kindly try again.'
-                ], 422);
+                ]);
             }
     }
 
@@ -180,17 +184,19 @@ class BooksController extends Controller
         $search = Book::where("publisher", "like", "%".$publisher."%")->get();
             if(count($search)){
                 return response()->json([
+                    "status_code"=> 200,
                     'succcess' => "success",
                     'message' => 'Search successful!',
                     'data'    => $search,
-                ], 200);
+                ]);
             }
             else {
                 return response()->json([
+                    "status_code"=> 422,
                     'succcess' => "successful with Exeption",
                     'message' => 'Search Error',
                     'error' => 'We could not find Job related to '."'".$publisher."'".', Kindly try again.'
-                ], 422);
+                ]);
             }
     }
 
@@ -199,17 +205,19 @@ class BooksController extends Controller
         $search = Book::where("release_date", "like", "%".$year."%")->get();
             if(count($search)){
                 return response()->json([
+                    "status_code"=> 200,
                     'succcess' => "success",
                     'message' => 'Search successful!',
                     'data'    => $search,
-                ], 200);
+                ]);
             }
             else {
                 return response()->json([
+                    "status_code"=> 422,
                     'succcess' => "successful with Exeption",
                     'message' => 'Search Error',
                     'error' => 'We could not find Job related to '."'".$year."'".', Kindly try again.'
-                ], 422);
+                ]);
             }
     }
 
