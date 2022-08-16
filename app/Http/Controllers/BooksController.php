@@ -71,7 +71,7 @@ class BooksController extends Controller
     public function update(Request $request, $id)
     {
             //Get data from feild and validate
-         $data=validator($request->all(),[
+         $data=$request->validate([
                 'name'=>['nullable', 'string'],
                 'isbn'=>'nullable',
                 'authors'=>'nullable',
