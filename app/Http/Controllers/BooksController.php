@@ -70,26 +70,36 @@ class BooksController extends Controller
 
     public function update(Request $request, $id)
     {
+            //Get data from feild and validate
+         $data=validator($request->all(),[
+                'name'=>['nullable', 'string'],
+                'isbn'=>'nullable',
+                'authors'=>'nullable',
+                'number_of_pages'=>'nullable',
+                'publisher'=>'nullable',
+                'country'=>'nullable',
+                'release_date'=>'nullable',
+            ]);
+
         $updateBook = Book::find($id);
 
-        if ($request->isMethd('post')) {
-
-            $data = $request->input();
-
-                $updateBook->name = $data['name'];
-                $updateBook->isbn = $data['isbn'];
-                $updateBook->authors = $data['authors'];
-                $updateBook->number_of_pages = $data['number_of_pages'];
-                $updateBook->publisher = $data['publisher'];
-                $updateBook->country = $data['country'];
-                $updateBook->release_date = $data['release_date'];
-                $updateBook->save();
-
+            //conditional statement to check if specified id exits
+        if ($updateBook) {
+            //method to update data  
+            $updateBook->update($data);
+            //return json reponse on outcome
             return response()->json([
                 "status_code"=> 201,
                 "status" => "success",
                 "message" => "The Book my First Book was updated successfully",
                 "data" => $updateBook
+            ]);
+        }else{
+            return response()->json([
+                "status_code"=> 404,
+                "status" => "unsuccessful",
+                "message" => "Unable to locate specified book record",
+                "data" => []
             ]);
         }
     }
