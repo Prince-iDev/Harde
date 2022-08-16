@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import vue, { h } from 'vue';
+import vue from 'vue'
 window.vue;
 
 import App from './component.App.vue';
