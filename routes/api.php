@@ -20,20 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
-Route::resource('books', App\Http\Controllers\BooksController::class)->only(['create','read','update','delete','show']);
-
-// Route::prefix('/v1')->namespace('App\Http\Controllers')->group(function()
-// {
-//         Access for Books Data
-//     Route::post('books', [BooksController::class, 'create']);
-//     Route::get('books', [BooksController::class, 'read']);
-//     Route::patch('books/{id}', [BooksController::class, 'update']);
-//     Route::delete('books/{id}', [BooksController::class, 'delete']);
-//     Route::get('books/{id}', [BooksController::class, 'show']);
-//     Route::get('search-name/{name}', [BooksController::class, 'searchName']);
-//     Route::get('search-country/{country}', [BooksController::class, 'searchCountry']);
-//     Route::get('search-publisher/{publisher}', [BooksController::class, 'searchPublisher']);
-//     Route::get('search-year/{year}', [BooksController::class, 'searchYear']);
-// });
+Route::prefix('/v1')->namespace('App\Http\Controllers')->group(function()
+{
+        //Access for Books Data
+    Route::post('books', [BooksController::class, 'create']);
+    Route::get('books', [BooksController::class, 'read']);
+    Route::patch('books/{id}', [BooksController::class, 'update']);
+    Route::delete('books/{id}', [BooksController::class, 'delete']);
+    Route::get('books/{id}', [BooksController::class, 'show']);
+    Route::get('search-name/{name}', [BooksController::class, 'searchName']);
+    Route::get('search-country/{country}', [BooksController::class, 'searchCountry']);
+    Route::get('search-publisher/{publisher}', [BooksController::class, 'searchPublisher']);
+    Route::get('search-year/{year}', [BooksController::class, 'searchYear']);
+});
