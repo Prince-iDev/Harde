@@ -49,14 +49,32 @@
                     number_of_pages:"",
                     publisher:"",
                     country:"",
-                    release_date:""
+                    release_date:"",
+                    _method:"patch"
                 }
             }
         },
+        mounted(){
+            this.showBook()
+        },
         methods:{
-            async create(){
-                await this.axios.post('/api/book', this.book).then(response=>{
-                    this.$router.push({name:"bookList"})
+            async showBook(){
+                await this.axios.get('/api/book/${this.$router.params.id}', this.book).then(response=>{
+                    const{name,isbn,authors,number_of_pages,publisher,country,release_date} = response.data
+                    this.book.name = name
+                    this.book.isbn = isbn
+                    this.book.authors = authors
+                    this.book.number_of_pages = number_of_pages
+                    this.book.publisher = publisher
+                    this.book.country = country
+                    this.book.release_date = release_date
+                }).catch(error=>{
+                    console.log(error)
+                })
+            },
+            async update(){
+                await this.axios.post('/api/book/${this.$router.params.id}', this.book).then(response=>{
+                    this.$router.push({name:'bookList'})
                 }).catch(error=>{
                     console.log(error)
                 })
