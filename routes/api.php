@@ -25,7 +25,7 @@ Route::prefix('/v1')->namespace('App\Http\Controllers')->group(function()
         //Access for Books Data
     Route::post('books', [BooksController::class, 'create']);
     Route::get('books', [BooksController::class, 'read']);
-    Route::get('books/{id}', [BooksController::class, 'update']);
+    Route::patch('books/{id}', [BooksController::class, 'update']);
     Route::delete('books/{id}', [BooksController::class, 'delete']);
     Route::get('books/{id}', [BooksController::class, 'show']);
     Route::get('search-name/{name}', [BooksController::class, 'searchName']);
