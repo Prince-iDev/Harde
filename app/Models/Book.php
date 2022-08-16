@@ -14,7 +14,7 @@ class Book extends Model
         'isbn',
         'authors',
         'number_of_pages',
-        'publishers',
+        'publisher',
         'country',
         'release_date'
     ];
