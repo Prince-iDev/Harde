@@ -104,11 +104,11 @@ class BooksController extends Controller
         }
     }
 
-    public function delete(Request $request, $id)
+     public function delete($id)
     {
-        $deleteBook = Book::where('id', $id)->get();
+        $deleteBook = Book::find($id);
 
-        if (count($deleteBook)) {
+        if ($deleteBook) {
             $deleteBook->delete();
             return response()->json([
                 "status_code"=> 204,
