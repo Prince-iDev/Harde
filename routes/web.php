@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\ExternalBooksController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ExternalBooksController::class, 'app']);
+
+	Route::match(['patch','get'], 'edit-book', [ExternalBooksController::class, 'editBook']);
+	// Route::get('external-books', [ExternalBooksController::class, 'app']);
+        //Access for Books Data
+    
