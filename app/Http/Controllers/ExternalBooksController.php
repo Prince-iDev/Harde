@@ -40,4 +40,13 @@ class ExternalBooksController extends Controller
             }
     }
 
+    public function app()
+    {
+    	$books = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books');
+
+    	return view('app', [
+    		'books' => json_decode($books)
+    		]);
+    }
+
 }
