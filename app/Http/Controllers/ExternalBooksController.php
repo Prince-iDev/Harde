@@ -49,7 +49,7 @@ class ExternalBooksController extends Controller
     	return view('app')->with(compact('books'));
     }
 
-    public function EditBook(Request $response, $id)
+    public function EditBook(Request $response)
     {
     	if ($response->isMethod('post')) {
     		 $data=$request->validate([
