@@ -42,11 +42,33 @@ class ExternalBooksController extends Controller
 
     public function app()
     {
-    	$books = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books');
+    	$response = Http::get('https://www.anapioficeandfire.com/api/books');
 
-    	return view('app', [
-    		'books' => json_decode($books)
-    		]);
+  			$books = $response->json();
+
+    	return view('app')->with(compact('books'));
+    }
+
+    public function EditBook(Request $response)
+    {
+    	if ($response->isMethod('post')) {
+    		 $data=$request->validate([
+                'name'=>['nullable', 'string'],
+                'isbn'=>'nullable',
+                'authors'=>'nullable',
+                'number_of_pages'=>'nullable',
+                'publisher'=>'nullable',
+                'country'=>'nullable',
+                'release_date'=>'nullable',
+            ]);
+
+    		$updateBook = Http::patch('https://www.anapioficeandfire.com/api/books');
+
+    		$updateBook->update($data);
+    	}
+
+    	return view('edit_books');
+    	
     }
 
 }
