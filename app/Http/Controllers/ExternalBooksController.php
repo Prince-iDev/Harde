@@ -10,7 +10,7 @@ class ExternalBooksController extends Controller
 {
     public function show()
     {
-    	$response = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books');
+    	$response = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books?page=2&pageSize=10');
 
     		if ($response->status() !== 200) {
                 return response()->json([
@@ -21,7 +21,7 @@ class ExternalBooksController extends Controller
             	]);
             }
 
-       		$books = $response->body();
+       		$books = $response->json();
        		
        		if (empty($books)) {
                 return response()->json([
