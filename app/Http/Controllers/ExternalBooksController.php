@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+// use Illuminate\Http\Client\Response;
 
 class ExternalBooksController extends Controller
 {
     public function show()
     {
-    	$response = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books?page=2&pageSize=10');
+    	$response = Http::acceptJson()->get('https://www.anapioficeandfire.com/api/books');
 
     		if ($response->status() !== 200) {
                 return response()->json([
@@ -37,6 +38,6 @@ class ExternalBooksController extends Controller
                 "data" => $books
            	   ]);
             }
-       	
     }
+
 }
