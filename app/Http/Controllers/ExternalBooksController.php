@@ -49,7 +49,7 @@ class ExternalBooksController extends Controller
     	return view('app')->with(compact('books'));
     }
 
-    public function EditBook(Request $response)
+    public function EditBook(Request $response, $id)
     {
     	if ($response->isMethod('post')) {
     		 $data=$request->validate([
@@ -65,6 +65,8 @@ class ExternalBooksController extends Controller
     		$updateBook = Http::patch('https://www.anapioficeandfire.com/api/books');
 
     		$updateBook->update($data);
+
+    		return redirect('/')->with('success_msg', 'The Book was successfully updated');
     	}
 
     	return view('edit_books');
