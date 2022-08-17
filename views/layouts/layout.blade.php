@@ -39,14 +39,8 @@
     @include('layouts.navbar')
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
-      <!-- partial -->
-      <div class="main-panel">
        <!-- content-wrapper begins -->
        @yield('content')
-        <!-- content-wrapper ends -->
-      </div>
-      <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
   </div>
