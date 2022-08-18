@@ -17,11 +17,11 @@
     </div>
       <!-- Categories Table Begins Here -->
 
-      <div class="container">
+      <div class="container-fluid">
         <div class="card">
           <div class="card-body">
-            <p class="card-title">Bookds Table</p>
-              <div class="col-12">
+            <p class="card-title">Books Table</p>
+              <div class="">
                  {{-- Success Response Display --}}
                     @if(Session::has('success_msg'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,12 +32,21 @@
                     </div>
                     @endif {{-- Login Response Display Ends--}}
 
-            <a href="{{ url('admin/add-edit-book') }}" style="max-width: 220px; display: inline-block; float: right;" class="btn btn-block btn btn-primary">Add Categories</a>
+                    {{-- Success Response Display --}}
+                    @if(Session::has('error_msg'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>Error:</strong> {{ Session::get('error_msg'); }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    @endif {{-- Login Response Display Ends--}}
+
                 <div class="table-responsive pt-3">
-                  <table id="book" class="table table-bordered" style="width:100%">
+                  <table id="book" class="table table-bordered" class="display" style="width:100%">
                     <thead>
                       <tr>
-                        <th>S/N#</th>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>ISBN</th>
                         <th>Authors</th>
@@ -51,16 +60,24 @@
                     <tbody>                    
                       @foreach($books as $book)
                       <tr>
-                        <td></td>
-                        <td>{{$book->name}}</td>
-                        <td>{{$book->isbn}}</td>
-                        <td>{{$book->name}}</td>
-                        <td>{{$book->numberOfPages}}</td>
-                        <td>{{$book->publisher}}</td>
-                        <td>{{$book->country}}</td>
-                        <td>{{$book->released}}</td>
+                        <td>No id</td>
+                        <td>{{$book['name']}}</td>
+                        <td>{{$book['isbn']}}</td>
                         <td>
-                          
+                          <?php 
+                            $author = implode(", ", $book['authors']);
+
+                            echo $author;
+                          ?>
+                        </td>
+                        <td>{{$book['numberOfPages']}}</td>
+                        <td>{{$book['publisher']}}</td>
+                        <td>{{$book['country']}}</td>
+                        <td>{{$book['released']}}</td>
+                        <td>
+                          <a class="#" href="{{ url('edit-book') }}"><i style="font-size:22px;" class="fa fa-pencil"></i></a>
+
+                          <a class="confirmDelete" href="javascript:void(0)" module="book" moduleId=""><i style="font-size:25px; color: red;" class="fa fa-trash"></i></a> 
                         </td>
                       </tr>
                       @endforeach
@@ -73,5 +90,10 @@
         </div>
 
   </div>
+  <script>
+    $(document).ready(function() {
+      $('#app').DataTable();
+    });
+  </script>
   <!-- content-wrapper ends -->
 @endsection
