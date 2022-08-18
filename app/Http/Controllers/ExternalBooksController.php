@@ -44,7 +44,11 @@ class ExternalBooksController extends Controller
     {
     	$response = Http::get('https://www.anapioficeandfire.com/api/books');
 
-  			$books = $response->json();
+        if ($response->status() !== 200) {
+            return redirect()->back()->with('error_msg',"Kindly check your network");
+        }
+
+  		$books = $response->json();
 
     	return view('app')->with(compact('books'));
     }
